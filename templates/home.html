@@ -1,0 +1,299 @@
+{% extends "index.html" %}
+{% block content %}
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="#">
+                    
+                                        <h1 style="color: red; display: flex; align-items: center;">
+                                            <img src="/static/img/airplane.png" alt="" style="height: 45px; width: 55px; margin-right: 10px;"> 
+                                            JourneyGenie
+                                        </h1>
+                                        
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6" style="margin-left: 70px;">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            {% if login == 'admin' %}
+                                            <li><a class="active" href="{% url 'homes' %}">home</a></li>
+                                            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+                                            <li><a class="" href="{% url 'addplaces' %}">Add Places</a></l/li>
+                                                
+                                          
+                                    
+                                    
+                                                
+                                            {% elif login == 'user' %}
+                                            <li><a class="active" href="{% url 'homes' %}">home
+                                            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+                                            <li><a class="" href="{% url 'bookings' %}">Bookings</a></li>
+                                            <li><a class="active" href="{% url 'recommend' %}"> Recommendation</a></li>                                         
+      
+                                           {% endif %}
+                                           <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                                                </ul>
+                                            </li>
+                                           
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            {% if login == 'user' %}
+                            <div class="seach_icon">
+                                <a href="{% url 'cart' %}" style="font-size: 35px;">
+                                    <i class="fa fa-cart-arrow-down"></i> 
+                                </a>
+                                
+                            </div>
+                            {% endif %}
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+     {% block title %}
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Meghalaya</h3>
+                                <!-- <p>Pixel perfect design with awesome contents</p> -->
+                                <a href="{% url 'destinations' %}" class="boxed-btn3" style="margin-top: 30px;">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider  d-flex align-items-center slider_bg_2 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Himachal Pradesh</h3>
+                                <!-- <p>Pixel perfect design with awesome contents</p> -->
+                                <a href="{% url 'destinations' %}" class="boxed-btn3" style="margin-top: 30px;">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider  d-flex align-items-center slider_bg_3 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Araku</h3>
+                                <!-- <p>Pixel perfect design with awesome contents</p> -->
+                                <a href="{% url 'destinations' %}" class="boxed-btn3" style="margin-top: 30px;">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- slider_area_end -->
+    
+    <!-- popular_destination_area_start  -->
+    <div class="popular_destination_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Popular Destinations</h3>
+<p>Discover top destinations with stunning views and unforgettable experiences.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for i in places %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                     
+                        <div class="thumb">
+                            
+                            {% comment %} {% for j in i.image %} {% endcomment %}
+                            <img src="/{{ i.image.0.imgpath }}" alt="">
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </div>
+              
+                        <div class="content">
+                            <a href="{% url 'destdetails' i.id %}">
+                            <p class="d-flex align-items-center">{{i.placename}}  </p>      </a>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newletter_area_end  -->
+<!-- 
+    <div class="video_area video_bg overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="video_wrap text-center">
+                        <h3>Enjoy Video</h3>
+                        <div class="video_icon">
+                            <a class="popup-video video_play_button" href="https://www.youtube.com/watch?v=f59dDEk57i0">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <!-- testimonial_area  -->
+    <div class="testimonial_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="testmonial_active owl-carousel">
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <div class="author_thumb">
+                                            <img src="/static/img/testmonial/author.png" alt="">
+                                        </div>
+                                        <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
+                                        <div class="testmonial_author">
+                                            <h3>- Micky Mouse</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <div class="author_thumb">
+                                            <img src="/static/img/testmonial/author.png" alt="">
+                                        </div>
+                                        <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
+                                        <div class="testmonial_author">
+                                            <h3>- Tom Mouse</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <div class="author_thumb">
+                                            <img src="/static/img/testmonial/author.png" alt="">
+                                        </div>
+                                        <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
+                                        <div class="testmonial_author">
+                                            <h3>- Jerry Mouse</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /testimonial_area  -->
+
+
+    <div class="recent_trip_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Recent Trips</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_trip">
+                        <div class="thumb">
+                            <img src="/static/img/trip/1.png" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="date">
+                                <span>Oct 12, 2019</span>
+                            </div>
+                            <a href="#">
+                                <h3>Journeys Are Best Measured In
+                                    New Friends</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_trip">
+                        <div class="thumb">
+                            <img src="/static/img/trip/2.png" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="date">
+                                <span>Oct 12, 2019</span>
+                            </div>
+                            <a href="#">
+                                <h3>Journeys Are Best Measured In
+                                    New Friends</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_trip">
+                        <div class="thumb">
+                            <img src="/static/img/trip/3.png" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="date">
+                                <span>Oct 12, 2019</span>
+                            </div>
+                            <a href="#">
+                                <h3>Journeys Are Best Measured In
+                                    New Friends</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    {% endblock %}

@@ -1,0 +1,349 @@
+{% extends "home.html" %}
+{% block title %}
+    <!-- header-end -->
+{% for i in place %}
+<div class="destination_banner_wrap overlay" style="background-image: url('/{{i.image.0.imgpath}}'); background-repeat: no-repeat; background-size: cover; padding: 300px 0; ">
+
+        <!-- <img src="/{{i.image.0.imgpath}}" alt=""> -->
+        <div class="destination_text text-center">
+            <h3>{{ i.placename }}</h3>
+            <p>{{i.city}}, {{i.state}}</p>
+        </div>
+    </div>
+
+
+
+    <div class="destination_details_info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-9">
+                    <div class="destination_info">
+                        <h3>Description</h3>
+                        <!-- <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p> -->
+                        <p>{{i.desc}}</p>
+                        <div class="single_destination">
+                            <h4> Popular Places in {{i.placename}}</h4>
+                            <p>There are many popular places located in this loaction. </p>
+                        </div>
+                        
+                        <div class="popular_places_area" >
+                            <div class="container" >
+                                <div class="row justify-content-center" style="margin-top: -100px;">
+                                    <div class="col-lg-6">
+                                        <div class="section_title text-center mb_70">
+                                            <h3>More Places Near {{i.placename}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if i.places %}
+                                <div class="row">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                   <center> <p class="alert alert-success">{{message}}</p></center>
+                                    {% endfor %}
+                                    {% endif %}
+                                {% for j in i.places %}
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single_place">
+                                         
+                                            <div class="thumb">
+                                              
+                                                <img src="/{{j.img}}" alt="">
+                                                {% comment %} <a href="#" class="prise">$500</a> {% endcomment %}
+                                            </div>
+                                            <div class="place_info">
+                                                <a href="{% url 'placesingledest' i.id forloop.counter %}"><h3>{{j.placename}}</h3></a>
+                                                <p>{{j.location}}, {{i.state}}</p>
+                                                <div class="rating_days d-flex justify-content-between">
+                                                    <span class="d-flex justify-content-center align-items-center">
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i>
+                                                         <a href="#">(20 Review)</a>
+                                                    </span>
+                                                    <!-- <div class="days">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        <a href="#">5 Days</a>
+                                                    </div> -->
+                                                </div>
+                                                {% if login == 'admin' %}
+                                                <div class="action_buttons mt-3">
+                                                    <a href="{% url 'updateplace' i.id forloop.counter %}" class="btn btn-primary">Update</a>
+                                                    <a href="{% url 'deleteplace' i.id forloop.counter %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this place?');">Delete</a>
+                                                </div>
+                                                {% endif %}
+                                             
+                                            </div>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    {% endfor %}
+                                
+                                    </div>
+                                    {% else %}
+                                    <center><p>No Data Added</p></center>
+                                    {% endif %}
+                                    </div>
+                                    
+                                    </div>
+
+                    
+                               
+                        
+                                               
+                            
+                    
+                    
+                        <div class="single_destination">
+                            <h4>Popular Restauarents and Food</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
+                        </div>
+
+                        
+                        <div class="popular_places_area" >
+                            <div class="container" >
+                                <div class="row justify-content-center" style="margin-top: -100px;">
+                                    <div class="col-lg-6">
+                                        <div class="section_title text-center mb_70">
+                                            <h3>Famous Foods & Restauarents in {{i.placename}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if i.restaurants %}
+                                <div class="row">
+                              
+                                {% for j in i.restaurants %}
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single_place">
+                                         
+                                            <div class="thumb">
+                                              
+                                                <img src="/{{j.img}}" alt="">
+                                                {% comment %} <a href="#" class="prise">$500</a> {% endcomment %}
+                                            </div>
+                                            <div class="place_info">
+                                                <a href="{% url 'foodsingledest' i.id forloop.counter %}"><h3>{{j.foodname}}</h3><br>
+                                                <h6>{{j.restname}}</h6></a>
+                                                <p>{{j.location}}, {{i.state}}</p>
+                                                <div class="rating_days d-flex justify-content-between">
+                                                    <span class="d-flex justify-content-center align-items-center">
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i> 
+                                                         <i class="fa fa-star"></i>
+                                                         <a href="#">(20 Review)</a>
+                                                    </span>
+                                                    <!-- <div class="days">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        <a href="#">5 Days</a>
+                                                    </div> -->
+                                                </div>
+                                                {% if login == 'admin' %}
+                                                <div class="action_buttons mt-3">
+                                                    <a href="{% url 'updatefoods' i.id forloop.counter %}" class="btn btn-primary">Update</a>
+                                                    <a href="{% url 'deletefoods' i.id forloop.counter %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this place?');">Delete</a>
+                                                </div>
+                                                {% endif %}
+                                             
+                                            </div>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    {% endfor %}
+                                
+                                    </div>
+                                    {% else %}
+                                    <center><p>No Data Added</p></center>
+                                    {% endif %}
+                                    </div>
+                                    
+                                    </div>
+                        <div class="single_destination">
+                            <h4>Best Stay Rooms</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
+                        </div>
+                        
+                        <div class="popular_places_area" >
+                            <div class="container" >
+                                <div class="row justify-content-center" style="margin-top: -100px;">
+                                    <div class="col-lg-6">
+                                        <div class="section_title text-center mb_70">
+                                            <h3>Best Places to Stay in {{i.placename}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if i.rooms %}
+                                <div class="row">
+                                    {% for j in i.rooms %}
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single_place">
+                                            <div class="thumb">
+                                                <img src="/{{ j.img }}" alt="">
+                                                {% comment %} <a href="#" class="prise">$500</a> {% endcomment %}
+                                            </div>
+                                            <div class="place_info">
+                                                <a href="{% url 'roomsingledest' i.id forloop.counter %}"><h3>{{ j.hotelname }}</h3></a>
+                                                <p>{{ j.location }}</p>
+                                                <div class="rating_days d-flex justify-content-between">
+                                                    <span class="d-flex justify-content-center align-items-center">
+                                                        <i class="fa fa-star"></i> 
+                                                        <i class="fa fa-star"></i> 
+                                                        <i class="fa fa-star"></i> 
+                                                        <i class="fa fa-star"></i> 
+                                                        <i class="fa fa-star"></i>
+                                                        <a href="#">(20 Review)</a>
+                                                    </span>
+                                                </div>
+                                {% if login == 'admin' %}
+                                                <!-- Update and Delete Buttons -->
+                                                <div class="action_buttons mt-3">
+                                                    <a href="{% url 'updaterooms' i.id forloop.counter %}" class="btn btn-primary">Update</a>
+                                                    <a href="{% url 'deleterooms' i.id forloop.counter %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this place?');">Delete</a>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                
+                                
+                                    </div>
+                                    {% else %}
+                                    <center><p>No Data Added</p></center>
+                                    {% endif %}
+                                    </div>
+                                    
+                                    </div>
+                    </div>
+                    {% endfor %}
+
+             {% if login == 'admin' %}   
+             {% for i in place %}
+    <div class="travel_variation_area">
+        <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                          <a href="{% url 'addsubplaces' i.id %}"> <img src="/static/img/location-pin.png" alt="" style="height: 60px; width: 70px;"></a> 
+                        </div>
+                        <a href="{% url 'addsubplaces' i.id %}"><h3>Places</h3></a>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div> 
+                    </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <a href="{% url 'addfoods' i.id %}"><img src="/static/img/restaurant-building.png" alt="" style="height: 60px; width: 70px;"></a>
+                        </div>
+                        <h3>Best Food</h3>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <a href="{% url 'addrooms' i.id %}"> <img src="/static/img/house.png" alt="" style="height: 60px; width: 70px;"></a>
+                        </div>
+                        <h3>Best Stay</h3>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div>
+                </div>
+               
+               
+             
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>    
+{% endfor %}
+{% endif %}
+   <div class="bordered_1px"></div>
+                    {% comment %} <div class="contact_join">
+                        <h3>Contact for join</h3>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                        <input type="text" placeholder="Your Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                        <input type="text" placeholder="Phone no.">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_input">
+                                        <textarea name="" id="" cols="30" rows="10"placeholder="Message" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="submit_btn">
+                                        <button class="boxed-btn4" type="submit">submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    
+    <!-- newletter_area_start  -->
+    <div class="newletter_area overlay">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="newsletter_text">
+                                <h4>Discover Your Perfect Destination</h4>
+<p>Explore stunning destinations and hidden gems. Your next unforgettable adventure starts here!</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="mail_form">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-9 col-md-8">
+                                        <form action="">
+                                        <div class="newsletter_field">
+                                            <input type="email" placeholder="Search Here...." >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="newsletter_btn">
+                                            <button class="boxed-btn4 " type="submit" >Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newletter_area_end  -->
+
+
+    </div>
+
+    
+
+  {% endblock %}

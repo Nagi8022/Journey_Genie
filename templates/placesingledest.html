@@ -1,0 +1,84 @@
+{% extends "home.html" %}
+{% block title %}
+    <!-- header-end -->
+
+<div class="destination_banner_wrap overlay" style="background-image: url('/{{data.img}}'); background-repeat: no-repeat; background-size: cover; padding: 300px 0; ">
+
+        <!-- <img src="/{{i.image.0.imgpath}}" alt=""> -->
+        <div class="destination_text text-center">
+            <h3>{{ data.placename }}</h3>
+            <p>{{data.location}}</p>
+        </div>
+    </div>
+
+    <div class="destination_details_info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-9">
+                    <div class="destination_info">
+                        <h3>Description</h3>
+                        <p>{{data.desc}}</p>
+                        <!-- <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p> -->
+                        <div class="single_destination">
+                            <h4>Opening Timings</h4>
+                            <p>From 9:00 AM To 6:00 PM</p>
+                        </div>
+                        <div class="single_destination">
+                            <h4>Travel Essentials</h4>
+                            {% if data.placetype == 'Hill' %}
+                            <p>When visiting hill areas, it’s essential to pack a variety of items to ensure comfort, safety, and enjoyment. Key items include warm clothing like jackets and thermals, comfortable footwear for trekking, rain gear, and woolen socks for colder climates. Personal care items like sunscreen, lip balm, toiletries, and hand sanitizer are crucial, as is a first aid kit with necessary medications. A water bottle and insect repellent are also important for hydration and protection. For electronics, a camera or smartphone, power bank, and flashlight are handy, while a backpack, map, ID, and snacks are essential for day trips or hikes. For trekking enthusiasts, equipment such as trekking poles, a sleeping bag, compass, and GPS may be needed. All these items can be collectively referred to as "travel essentials" or "hill station packing gear," ensuring you’re prepared for a variety of experiences in the hills.</p>
+                            {% elif data.placetype == 'Beaches' %}
+                            <p>When visiting beach areas, it’s essential to pack a variety of items to ensure
+                                comfort, safety, and enjoyment. Key items include swimwear, sunscreen, sunglasses, a hat
+                                or cap, and a beach towel. Personal care items like toiletries, hand sanitizer, and
+                                insect repellent are crucial, as is a water bottle for hydration. For electronics, a camera
+                                or smartphone, power bank, and waterproof phone case are handy, while a backpack, ID,
+                                and snacks are essential for day trips or beach activities. For water sports enthusiasts, equipment
+                                such as a surfboard, paddleboard, or snorkeling gear may be needed. All these
+                                items can be collectively referred to as "travel essentials" or "beach packing gear," ensuring
+                                you’re prepared for a variety of experiences in the beach.</p>
+                                {% elif data.placetype == 'Nature' %}
+                                <p>When visiting nature areas, it’s essential to pack a variety of items to ensure
+                                    comfort, safety, and enjoyment. Key items include comfortable footwear, rain gear, and
+                                    insect repellent. Personal care items like sunscreen, lip balm, and toiletries are crucial
+                                    as is a water bottle for hydration. For electronics, a camera or smartphone, power bank,
+                                    and flashlight are handy, while a backpack, map, ID, and snacks are essential for day
+                                    trips or hikes. For nature enthusiasts, equipment such as binoculars, a magnifying glass
+                                    or a portable stove may be needed. All these items can be collectively referred to as
+                                    "travel essentials" or "nature packing gear," ensuring you’re prepared for a variety of experiences
+                                    in nature.</p>
+                                    {% endif %}
+                        </div>
+                        <!-- <div class="single_destination">
+                            <h4>Day-03</h4>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
+                        </div> -->
+                    </div>
+                    <div class="bordered_1px"></div>
+                    {% comment %} <div class="contact_join">
+                        <h3>Add To Cart Or Book The Resort</h3>
+                        <div style="display: flex; gap: 20px;">
+                            <!-- Add to Cart Link Button -->
+                            <a href="#" 
+                               style="display: inline-block; padding: 15px 30px; font-size: 16px; text-decoration: none; border: 2px solid #28a745; background-color: #28a745; color: white; border-radius: 5px; transition: background-color 0.3s, transform 0.3s;" 
+                               onmouseover="this.style.backgroundColor='#218838'; this.style.transform='scale(1.05)'" 
+                               onmouseout="this.style.backgroundColor='#28a745'; this.style.transform='scale(1)'">
+                                Add to Cart
+                            </a>
+                    
+                            <!-- Book Now Link Button -->
+                            <a href="#" 
+                               style="display: inline-block; padding: 15px 30px; font-size: 16px; text-decoration: none; border: 2px solid #007bff; background-color: #007bff; color: white; border-radius: 5px; transition: background-color 0.3s, transform 0.3s;" 
+                               onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)'" 
+                               onmouseout="this.style.backgroundColor='#007bff'; this.style.transform='scale(1)'">
+                                Book Now
+                            </a>
+                        </div>
+                         </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+    {% endblock %}

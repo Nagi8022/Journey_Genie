@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>JourneyGenie - Login</title>
+    <meta
+      name="description"
+      content="Login to JourneyGenie and start your adventure"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/static/img/favicon.png"
+    />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/static/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/css/themify-icons.css" />
+    <link rel="stylesheet" href="/static/css/nice-select.css" />
+    <link rel="stylesheet" href="/static/css/flaticon.css" />
+    <link rel="stylesheet" href="/static/css/gijgo.css" />
+    <link rel="stylesheet" href="/static/css/animate.css" />
+    <link rel="stylesheet" href="/static/css/slick.css" />
+    <link rel="stylesheet" href="/static/css/slicknav.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 140px);
+        background: linear-gradient(
+          135deg,
+          #c20606,
+          /* Dark Red */ #c83c3c,
+          /* Brown */ #b22222,
+          /* Firebrick Red */ #cd5c5c,
+          /* Indian Red */ #dc143c,
+          /* Crimson */ #800000 /* Maroon */
+        );
+        background-size: 400% 400%;
+        animation: redGradientBG 15s ease infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @keyframes redGradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .floating-icons {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .icon {
+        position: absolute;
+        opacity: 0.6;
+        animation: float 20s linear infinite;
+      }
+
+      .icon svg {
+        width: 24px;
+        height: 24px;
+        fill: rgba(255, 255, 255, 0.7);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(var(--translateX), var(--translateY))
+            rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .login-box {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 50px;
+        border-radius: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        width: 500px;
+        position: relative;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .login-box::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #8b0000, #a52a2a, #b22222, #cd5c5c);
+        border-radius: 32px;
+        z-index: -1;
+        filter: blur(20px);
+        opacity: 0.5;
+      }
+
+      .login-box h2 {
+        font-size: 2.5em;
+        color: #4a1e1e;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 600;
+      }
+
+      .login-box input {
+        width: 100%;
+        padding: 15px 25px;
+        margin-bottom: 25px;
+        border: 2px solid rgba(139, 0, 0, 0.2);
+        border-radius: 15px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .login-box input:focus {
+        border-color: #8b0000;
+        box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
+        outline: none;
+      }
+
+      .login-box button {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(45deg, #8b0000, #b22222);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .login-box button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .login-box p {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 16px;
+      }
+
+      .login-box a {
+        color: #8b0000;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .login-box a:hover {
+        color: #4a1e1e;
+      }
+
+      .alert {
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        background: rgba(220, 20, 60, 0.2);
+        border: 1px solid rgba(220, 20, 60, 0.3);
+        color: #8b0000;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% extends "index.html" %} {% block title %}
+    <div class="login-container">
+      <div class="floating-icons">
+        <!-- Travel icons that will be generated via JavaScript -->
+      </div>
+      <div class="login-box">
+        <h2>Welcome to JourneyGenie</h2>
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %} {% endif %}
+        <form
+          action="{% url 'login' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            required
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            pattern=".{8}"
+            title="Password must be exactly 8 digits."
+            minlength="8"
+            maxlength="8"
+            autocomplete="current-password"
+          />
+          <button type="submit">Begin Your Journey</button>
+        </form>
+        <p><a href="">Forgot Password?</a></p>
+      </div>
+    </div>
+    {% endblock %}
+
+    <script>
+      const icons = [
+        `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-12h-2v6h2V8zm0 8h-2v-2h2v2z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+      ];
+
+      function createIcon() {
+        const iconContainer = document.querySelector(".floating-icons");
+        if (!iconContainer) return;
+
+        const icon = document.createElement("div");
+        icon.className = "icon";
+
+        // Random icon from array
+        icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+
+        // Randomize size
+        const size = Math.floor(Math.random() * 100) + 50; // 50-150px
+        icon.style.width = `${size}px`;
+        icon.style.height = `${size}px`;
+
+        // Random starting position
+        const startX = Math.random() * window.innerWidth;
+        const startY = Math.random() * window.innerHeight;
+
+        // Random translation with larger range
+        const translateX = (Math.random() - 0.5) * 800;
+        const translateY = (Math.random() - 0.5) * 800;
+
+        icon.style.setProperty("--translateX", `${translateX}px`);
+        icon.style.setProperty("--translateY", `${translateY}px`);
+
+        icon.style.position = "absolute";
+        icon.style.left = `${startX}px`;
+        icon.style.top = `${startY}px`;
+
+        // Randomize animation duration and delay
+        icon.style.animationDuration = `${Math.random() * 25 + 20}s`; // 20-45s
+        icon.style.animationDelay = `${Math.random() * 5}s`; // 0-5s delay
+
+        iconContainer.appendChild(icon);
+
+        // Remove icon after animation
+        icon.addEventListener("animationend", () => {
+          icon.remove();
+        });
+      }
+
+      function initializeIcons() {
+        const iconContainer = document.querySelector(".floating-icons");
+        if (!iconContainer) return;
+
+        iconContainer.innerHTML = ""; // Clear existing icons
+
+        // Create a large number of initial icons
+        for (let i = 0; i < 30; i++) {
+          createIcon();
+        }
+      }
+
+      // Wait for DOM to be fully loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initial icon generation
+        initializeIcons();
+
+        // Continuously generate new icons
+        setInterval(createIcon, 2000);
+
+        // Regenerate icons on window resize
+        window.addEventListener("resize", initializeIcons);
+      });
+    </script>
+
+    <style>
+      .floating-icons {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .icon {
+        position: absolute;
+        opacity: 0.6;
+        animation: float 20s linear infinite;
+      }
+
+      .icon svg {
+        width: 100%;
+        height: 100%;
+        fill: rgba(255, 255, 255, 0.1);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(var(--translateX), var(--translateY))
+            rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+
+    <script src="/static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/isotope.pkgd.min.js"></script>
+    <script src="/static/js/ajax-form.js"></script>
+    <script src="/static/js/waypoints.min.js"></script>
+    <script src="/static/js/jquery.counterup.min.js"></script>
+    <script src="/static/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/static/js/scrollIt.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/wow.min.js"></script>
+    <script src="/static/js/nice-select.min.js"></script>
+    <script src="/static/js/jquery.slicknav.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/gijgo.min.js"></script>
+    <script src="/static/js/slick.min.js"></script>
+    <script src="/static/js/contact.js"></script>
+    <script src="/static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
+    <script src="/static/js/mail-script.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

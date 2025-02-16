@@ -1,0 +1,469 @@
+{% extends "home.html" %} {% block title %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_2">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="bradcam_text text-center">
+          <h3>Destinations</h3>
+          <p>Make your TravelLife easier</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ bradcam_area  -->
+
+<!-- Packing List Button in Modal -->
+<button class="packing-list-btn" onclick="togglePackingList(event)">
+  <i class="fas fa-suitcase"></i>
+  Packing List
+</button>
+
+<!-- Packing List Sidebar -->
+<div class="packing-list-sidebar" id="packingListSidebar">
+  <button class="close-packing-list" onclick="closePackingList()">
+    <i class="fas fa-times"></i>
+  </button>
+  <h2 style="color: var(--primary); margin-bottom: 2rem">
+    Travel Packing List
+  </h2>
+  <div class="packing-category">
+    <div class="category-header" onclick="toggleCategory(this)">
+      <span><i class="fas fa-passport"></i> Essential Documents</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="category-items">
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Passport/ID
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Travel Insurance
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Booking Confirmations
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Emergency Contacts
+      </div>
+    </div>
+  </div>
+  <div class="packing-category">
+    <div class="category-header" onclick="toggleCategory(this)">
+      <span><i class="fas fa-tshirt"></i> Clothing</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="category-items">
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Underwear
+      </div>
+      <div class="packing-item"><i class="fas fa-check-circle"></i> Socks</div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> T-Shirts
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Pants/Shorts
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Jacket/Sweater
+      </div>
+    </div>
+  </div>
+  <div class="packing-category">
+    <div class="category-header" onclick="toggleCategory(this)">
+      <span><i class="fas fa-first-aid"></i> Toiletries</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="category-items">
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Toothbrush
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Toothpaste
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Deodorant
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Shampoo
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Sunscreen
+      </div>
+    </div>
+  </div>
+  <div class="packing-category">
+    <div class="category-header" onclick="toggleCategory(this)">
+      <span><i class="fas fa-laptop"></i> Electronics</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="category-items">
+      <div class="packing-item"><i class="fas fa-check-circle"></i> Phone</div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Charger
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Power Bank
+      </div>
+      <div class="packing-item">
+        <i class="fas fa-check-circle"></i> Headphones
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- where_togo_area_start  -->
+<div class="section_title text-center mb-5 mt-5">
+  <h3>Popular Destinations</h3>
+</div>
+
+<!-- newletter_area_start  -->
+<div class="newletter_area overlay">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row align-items-center">
+          <div class="col-lg-5">
+            <div class="newsletter_text">
+              <h4>Discover Your Perfect Destination</h4>
+              <p>
+                Explore stunning destinations and hidden gems. Your next
+                unforgettable adventure starts here!
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="mail_form">
+              <form
+                action="{% url 'search_destinations' %}"
+                method="POST"
+                class="row g-3"
+              >
+                {% csrf_token %}
+                <div class="col-md-8">
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    name="search_query"
+                    placeholder="Search by place name, city, state..."
+                  />
+                </div>
+                <div class="col-md-4">
+                  <button class="boxed-btn4 w-100" type="submit">Search</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popular_places_area section_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="filter_result_wrap">
+          <h3>Filter Result</h3>
+          <div class="filter_bordered">
+            <div class="filter_inner">
+              <form
+                action="{% url 'filter' %}"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="single_select mb-4">
+                      <select name="areatype" class="form-select" required>
+                        <option value="" disabled selected>
+                          Select Area Type
+                        </option>
+                        <option value="Hill">Hill</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Beaches">Beaches</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="reset_btn">
+                  <button class="boxed-btn4 w-100" type="submit">Filter</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if data %}
+      <div class="col-lg-8">
+        <div class="row g-4">
+          {% for i in data %}
+          <div class="col-lg-6 col-md-6">
+            <div class="single_place">
+              <div class="thumb" style="height: 250px; overflow: hidden">
+                <img
+                  src="/{{i.image.0.imgpath}}"
+                  alt=""
+                  class="w-100 h-100 object-fit-cover"
+                />
+              </div>
+              <div class="place_info p-3">
+                <a href="{% url 'destdetails' i.id %}">
+                  <h3 class="mb-2">{{i.placename}}</h3>
+                </a>
+                <p class="mb-3">{{i.city}}, {{i.state}}</p>
+                <div
+                  class="rating_days d-flex justify-content-between align-items-center"
+                >
+                  <span class="d-flex align-items-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <a href="#" class="ms-2">(20 Review)</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <a class="boxed-btn4" href="#">More Places</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="text-center py-5">
+  <p>No Data Found</p>
+</div>
+{% endif %}
+
+<style>
+  .single_place {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .single_place:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .place_info h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #040e27;
+    margin-bottom: 0;
+  }
+
+  .place_info p {
+    font-size: 14px;
+    color: #7a838b;
+  }
+
+  .newsletter_field input {
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .boxed-btn4 {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .filter_bordered {
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
+
+  .single_select select {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
+
+  .section_padding {
+    padding: 80px 0;
+  }
+
+  .object-fit-cover {
+    object-fit: cover;
+  }
+
+  /* Packing List Button Styles */
+  .packing-list-btn {
+    position: fixed;
+    top: 20px;
+    right: 180px;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    border: none;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  }
+  .packing-list-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  }
+  .packing-list-btn i {
+    font-size: 1.2rem;
+  }
+  /* Packing List Sidebar Styles */
+  .packing-list-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 2rem;
+  }
+  .packing-list-sidebar.active {
+    right: 0;
+  }
+  .close-packing-list {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .packing-category {
+    margin-bottom: 1.5rem;
+  }
+  .category-header {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .category-items {
+    padding-left: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .category-items.active {
+    max-height: 500px;
+  }
+  .packing-item {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  .packing-item:hover {
+    transform: translateX(10px);
+    color: var(--secondary);
+  }
+  .packing-item i {
+    color: var(--secondary);
+  }
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .packing-list-sidebar {
+      width: 100%;
+      right: -100%;
+    }
+    .packing-list-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  function togglePackingList(event) {
+    event.stopPropagation();
+    const sidebar = document.getElementById("packingListSidebar");
+    sidebar.classList.toggle("active");
+  }
+
+  function closePackingList() {
+    const sidebar = document.getElementById("packingListSidebar");
+    sidebar.classList.remove("active");
+  }
+
+  function toggleCategory(header) {
+    const items = header.nextElementSibling;
+    const icon = header.querySelector(".fa-chevron-down");
+    items.classList.toggle("active");
+    if (items.classList.contains("active")) {
+      icon.style.transform = "rotate(180deg)";
+    } else {
+      icon.style.transform = "rotate(0deg)";
+    }
+  }
+
+  // Add event listener to close sidebar when clicking outside
+  document.addEventListener("click", function (event) {
+    const sidebar = document.getElementById("packingListSidebar");
+    const packingListBtn = document.querySelector(".packing-list-btn");
+
+    if (
+      sidebar.classList.contains("active") &&
+      !sidebar.contains(event.target) &&
+      !packingListBtn.contains(event.target)
+    ) {
+      sidebar.classList.remove("active");
+    }
+  });
+
+  // Optional: Automatically expand all categories on page load
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".category-items").forEach((category) => {
+      category.classList.add("active");
+      const icon =
+        category.previousElementSibling.querySelector(".fa-chevron-down");
+      icon.style.transform = "rotate(180deg)";
+    });
+  });
+</script>
+{% endblock %}

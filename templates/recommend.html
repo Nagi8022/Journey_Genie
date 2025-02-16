@@ -1,0 +1,454 @@
+{% extends 'home.html' %} {% block title %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey Genie: Personalized Recommendations</title>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --background-color: #f4f6f9;
+      --text-color: #333;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .welcome-container {
+      position: fixed;
+      top: 150px;
+      left: 100px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: float 3s ease-in-out infinite;
+      z-index: 1000;
+    }
+
+    .welcome-message {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      max-width: 250px;
+      position: relative;
+    }
+
+    .welcome-message::before {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 10px solid white;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background: var(--secondary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+      font-family: "Inter", "Arial", sans-serif;
+      line-height: 1.6;
+      max-height: 15vh;
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      margin: 30px auto;
+      background-color: white;
+      border-radius: var(--border-radius);
+      max-width: 800px;
+      box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.07);
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    .form-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center,
+        rgba(52, 152, 219, 0.1) 0%,
+        transparent 70%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .form-title {
+      font-size: 32px;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: 700;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      height: 4px;
+      width: 80px;
+      background: var(--secondary-color);
+      border-radius: 2px;
+    }
+
+    .travel-form {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    label i {
+      color: var(--secondary-color);
+      margin-right: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--border-radius);
+      border: 2px solid #e2e8f0;
+      font-size: 15px;
+      color: var(--text-color);
+      background-color: #f8fafc;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .submit-button {
+      background: linear-gradient(
+        to right,
+        var(--primary-color),
+        var(--secondary-color)
+      );
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      padding: 15px;
+      margin-top: 100px;
+      border-radius: var(--border-radius);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 20px rgba(45, 54, 72, 0.2);
+      transform: translateY(0);
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 24px rgba(45, 54, 72, 0.3);
+    }
+
+    fieldset {
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 25px;
+      background-color: #f8fafc;
+    }
+
+    legend {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+      padding: 0 15px;
+      background-color: white;
+      border-radius: 8px;
+    }
+
+    .radio-group,
+    .form-group select {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .radio-group label,
+    .form-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .radio-group input,
+    .form-group input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .form-section {
+        padding: 20px;
+        margin: 15px;
+      }
+
+      .radio-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="welcome-container">
+    <div class="welcome-message">
+      Welcome! I'll help you find your perfect destination!
+    </div>
+    <div class="avatar">🧞‍♂️</div>
+  </div>
+
+  <div>
+    <section class="form-section">
+      <h1 class="form-title">Journey Genie: Personalized Recommendations</h1>
+      <form action="{% url 'recommend' %}" method="POST" class="travel-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="age"><i class="fas fa-birthday-cake"></i>Age:</label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            min="18"
+            max="100"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="gender"><i class="fas fa-venus-mars"></i>Gender:</label>
+          <select id="gender" name="gender">
+            <option value="select">Select the option</option>
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+            <option value="2">Other</option>
+            <option value="3">Prefer not to say</option>
+          </select>
+        </div>
+
+        <fieldset class="form-group">
+          <legend><i class="fas fa-medical-icon"></i>Health Conditions</legend>
+          <label
+            ><input type="checkbox" name="health_conditions" value="Asthma" />
+            Asthma</label
+          >
+          <label
+            ><input type="checkbox" name="health_conditions" value="COPD" />
+            COPD</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="health_conditions"
+              value="Allergies"
+            />
+            Allergies</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="health_conditions"
+              value="Hypertension"
+            />
+            Hypertension</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="health_conditions"
+              value="Heart Disease"
+            />
+            Heart Disease</label
+          >
+        </fieldset>
+
+        <div class="form-group">
+          <label for="climate"
+            ><i class="fas fa-cloud-sun"></i>Climate Preference:</label
+          >
+          <div class="radio-group">
+            <label
+              ><input type="radio" id="hot" name="climate" value="0" />
+              Hot</label
+            >
+            <label
+              ><input type="radio" id="cold" name="climate" value="1" />
+              Cold</label
+            >
+            <label
+              ><input type="radio" id="moderate" name="climate" value="2" />
+              Moderate</label
+            >
+            <label
+              ><input
+                type="radio"
+                id="no_preference"
+                name="climate"
+                value="3"
+              />
+              No Preference</label
+            >
+          </div>
+        </div>
+
+        <fieldset class="form-group">
+          <legend><i class="fas fa-hiking"></i>Activity Type</legend>
+          <label
+            ><input type="checkbox" name="activities" value="Adventure" />
+            Adventure (Trekking, Paragliding)</label
+          >
+          <label
+            ><input type="checkbox" name="activities" value="Relaxation" />
+            Relaxation (Beaches, Spas)</label
+          >
+          <label
+            ><input type="checkbox" name="activities" value="Cultural" />
+            Cultural (Historical Sites, Temples)</label
+          >
+        </fieldset>
+
+        <div class="form-group">
+          <label for="budget"
+            ><i class="fas fa-wallet"></i>Travel Budget:</label
+          >
+          <select id="budget" name="budget">
+            <option value="select">Select the option</option>
+            <option value="0">Low</option>
+            <option value="1">Medium</option>
+            <option value="2">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="time_available"
+            ><i class="fas fa-clock"></i>Time Available:</label
+          >
+          <select id="time_available" name="time_available">
+            <option value="select">Select the option</option>
+            <option value="0">Weekend trip (1-2 days)</option>
+            <option value="1">Short trip (3-4 days)</option>
+            <option value="2">Week-long (5-7 days)</option>
+            <option value="3">Extended stay (8+ days)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="current_location"
+            ><i class="fas fa-map-marker-alt"></i>Current Location:</label
+          >
+          <select id="current_location" name="current_location">
+            <option value="select">Select the option</option>
+            <option value="0">Mumbai</option>
+            <option value="1">Delhi</option>
+            <option value="2">Bengaluru</option>
+            <option value="3">Kolkata</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="companions"
+            ><i class="fas fa-users"></i>Travel Companions:</label
+          >
+          <select id="companions" name="companions">
+            <option value="select">Select the option</option>
+            <option value="0">Solo</option>
+            <option value="1">Couple</option>
+            <option value="2">Family</option>
+            <option value="3">Friends</option>
+            <option value="4">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-button">
+          Find your Personalized Journey plan
+        </button>
+      </form>
+    </section>
+  </div>
+  {% endblock %}
+</body>

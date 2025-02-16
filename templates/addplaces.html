@@ -1,0 +1,184 @@
+{% extends "home.html" %}
+
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Tourism Places in India</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #AECBE6;
+        }
+
+        .form-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(174, 203, 230, 0.8));
+            padding: 40px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+            margin-bottom: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(72, 206, 149, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input[type="file"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .form-group select {
+            background-color: #fff;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22 fill=%22none%22%3E%3Cpath fill=%22%23333%22 d=%22M3.5 3.5L5 5L6.5 3.5%22/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for success message */
+        .alert {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Media Queries for smaller screens */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    {% if messages %}
+    {% for message in messages %}
+    <center> <p class="alert">{{ message }}</p></center>
+    {% endfor %}
+    {% endif %}
+
+    <h1>Add Tourism Place in India</h1>
+    <form action="{% url 'addplaces' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Tourism Place Details -->
+        <div class="form-group">
+            <label for="place-name">Tourism Place Name:</label>
+            <input type="text" id="place-name" name="name" placeholder="Enter place name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" placeholder="Enter State" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" placeholder="Enter city" required>
+        </div>
+
+        <div class="form-group">
+            <label for="area-type">Area Type:</label>
+            <select name="areatype" required>
+                <option value="" disabled selected>Select Area Type</option>
+                <option value="Hill">Hill</option>
+                <option value="Nature">Nature</option>
+                <option value="Beaches">Beaches</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="place-description">Description:</label>
+            <textarea id="place-description" name="desc" placeholder="Enter description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Tourism Place Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Add Tourism Place</button>
+    </form>
+</div>
+
+</body>
+{% endblock %}

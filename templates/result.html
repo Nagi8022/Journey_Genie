@@ -1,0 +1,1178 @@
+{% extends "home.html" %} {% block title %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Journey Genie - Your Travel Recommendations</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #3498db;
+        --accent: #e74c3c;
+        --background: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #2d3748;
+        --text-light: #718096;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: white;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 60%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .recommendations-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .recommendation-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+      }
+
+      .recommendation-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-header {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: rgb(193, 19, 19);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-content {
+        padding: 1.5rem;
+      }
+
+      .description {
+        color: var(--text);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-title {
+        font-weight: 600;
+        color: var(--primary);
+        margin: 1rem 0 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .activities-list,
+      .food-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .activities-list li,
+      .food-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #edf2f7;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .activities-list li:last-child,
+      .food-list li:last-child {
+        border-bottom: none;
+      }
+
+      .activities-list li::before {
+        content: "🎯";
+      }
+
+      .food-list li::before {
+        content: "🍽️";
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(111, 192, 230, 0.8);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background: white;
+
+        min-width: 1000px;
+        margin: auto;
+        border-radius: 20px;
+        position: relative;
+        transform: scale(0.7);
+        transition: transform 0.3s ease;
+
+        max-height: 90vh;
+        font-size: 25px;
+        overflow-y: auto;
+      }
+
+      /* Tab Styles */
+      .modal-tabs {
+        display: flex;
+        background: var(--primary);
+        padding: 1rem 1rem 0;
+        gap: 0.5rem;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .tab-button {
+        padding: 0.8rem 1.5rem;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px 10px 0 0;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .tab-button.active {
+        background: white;
+        color: var(--primary);
+      }
+
+      .tab-content {
+        display: none;
+        padding: 2rem;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Itinerary Styles */
+      .day-itinerary {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .day-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .save-calendar-btn {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .activity-item {
+        display: flex;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 0.8rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .activity-time {
+        min-width: 100px;
+        font-weight: 600;
+      }
+
+      .activity-details {
+        flex-grow: 1;
+      }
+
+      .activity-meta {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+
+      /* Emergency Info Styles */
+      .emergency-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .emergency-card {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+      }
+
+      .emergency-card h3 {
+        color: var(--primary);
+        margin-top: 0;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .emergency-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .emergency-list li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .emergency-list li:last-child {
+        border-bottom: none;
+      }
+
+      /* Language Panel Styles */
+      .phrase-card {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+
+      .phrase-text {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .phrase-translation {
+        color: var(--text-light);
+        font-style: italic;
+      }
+
+      .play-audio {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 1rem;
+      }
+
+      /* Weather Alert Styles */
+      .weather-alert {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .alternate-activity {
+        background: #e2e8f0;
+        padding: 0.8rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .close-modal:hover {
+        transform: rotate(90deg);
+        transition: transform 0.3s ease;
+      }
+
+      /* New Packing List Button Styles */
+      .packing-list-btn {
+        position: absolute;
+        top: 1rem;
+        right: 4rem;
+        background: linear-gradient(45deg, var(--secondary), var(--primary));
+        border: none;
+        color: white;
+        padding: 0.8rem 1.2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        z-index: 2;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      }
+
+      .packing-list-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+      }
+
+      .packing-list-btn i {
+        font-size: 1.2rem;
+      }
+
+      .packing-list-sidebar {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1001;
+        overflow-y: auto;
+        padding: 2rem;
+      }
+
+      .packing-list-sidebar.active {
+        right: 0;
+      }
+
+      .close-packing-list {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .packing-category {
+        margin-bottom: 1.5rem;
+      }
+
+      .category-header {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .category-items {
+        padding-left: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .category-items.active {
+        max-height: 500px;
+      }
+
+      .packing-item {
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.2s ease;
+      }
+
+      .packing-item:hover {
+        transform: translateX(10px);
+        color: var(--secondary);
+      }
+
+      .packing-item i {
+        color: var(--secondary);
+      }
+
+      /* Additional decorative elements */
+      .decoration-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(45deg, var(--secondary), transparent);
+        opacity: 0.1;
+      }
+
+      .circle-1 {
+        width: 200px;
+        height: 200px;
+        top: -100px;
+        left: -100px;
+      }
+
+      .circle-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        right: -150px;
+      }
+
+      @media (max-width: 768px) {
+        .recommendations-container {
+          grid-template-columns: 1fr;
+          padding: 0 1rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 1rem;
+        }
+
+        .packing-list-sidebar {
+          width: 100%;
+          right: -100%;
+        }
+
+        .packing-list-btn {
+          padding: 0.6rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="decoration-circle circle-1"></div>
+      <div class="decoration-circle circle-2"></div>
+      <h1>Your Perfect Destinations Await</h1>
+    </div>
+
+    {% if recommendations %}
+    <div class="recommendations-container">
+      {% for recommendation in recommendations %}
+      <div
+        class="recommendation-card"
+        onclick="showModal('{{ recommendation.place|escapejs }}')"
+      >
+        <div class="card-header">
+          <h3 style="color: #edf2f7">{{ recommendation.place }}</h3>
+        </div>
+        <div class="card-content">
+          <p class="description">{{ recommendation.description }}</p>
+
+          <div class="section-title">
+            <i class="fas fa-hiking"></i>
+            <span>Featured Activities</span>
+          </div>
+          <ul class="activities-list">
+            {% for activity in recommendation.activities %}
+            <li>{{ activity }}</li>
+            {% endfor %}
+          </ul>
+
+          <div class="section-title">
+            <i class="fas fa-utensils"></i>
+            <span>Must-Try Foods</span>
+          </div>
+          <ul class="food-list">
+            {% for food in recommendation.must_try_foods %}
+            <li>{{ food }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Enhanced Modal with Tabs -->
+    <div id="destinationModal" class="modal">
+      <button class="close-modal" onclick="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="packing-list-btn" onclick="togglePackingList(event)">
+        <i class="fas fa-suitcase"></i>
+        Packing List
+      </button>
+      <div class="modal-content">
+        <div class="modal-tabs">
+          <button
+            class="tab-button active"
+            onclick="switchTab(event, 'overview')"
+          >
+            Overview
+          </button>
+          <button class="tab-button" onclick="switchTab(event, 'itinerary')">
+            Smart Itinerary
+          </button>
+          <button class="tab-button" onclick="switchTab(event, 'emergency')">
+            Emergency Info
+          </button>
+          <button class="tab-button" onclick="switchTab(event, 'language')">
+            Local Guidance
+          </button>
+        </div>
+
+        <div id="overview" class="tab-content active"></div>
+
+        <div id="itinerary" class="tab-content">
+          <div class="weather-alert">
+            <i class="fas fa-cloud-rain"></i>
+            <strong>Weather Alert:</strong> Rain expected tomorrow afternoon.
+            Consider indoor alternatives.
+          </div>
+
+          <div class="day-itinerary">
+            <div class="day-header">
+              <h3>Day 1</h3>
+              <button class="save-calendar-btn" onclick="saveToCalendar(1)">
+                <i class="fas fa-calendar-plus"></i>
+                Save to Calendar
+              </button>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">09:00 AM</div>
+              <div class="activity-details">
+                <div class="activity-title">Visit Historical Site</div>
+                <div class="activity-meta">
+                  <span><i class="fas fa-clock"></i> 2 hours</span>
+                  <span
+                    ><i class="fas fa-sun"></i> Best time: Early morning</span
+                  >
+                  <span><i class="fas fa-car"></i> 20 min from hotel</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="emergency" class="tab-content">
+          <div class="emergency-grid">
+            <div class="emergency-card">
+              <h3><i class="fas fa-phone-alt"></i> Emergency Numbers</h3>
+              <ul class="emergency-list">
+                <li><i class="fas fa-ambulance"></i> Ambulance: 102</li>
+                <li><i class="fas fa-shield-alt"></i> Police: 100</li>
+                <li><i class="fas fa-user-shield"></i> Tourist Police: 126</li>
+              </ul>
+            </div>
+
+            <div class="emergency-card">
+              <h3><i class="fas fa-hospital"></i> Nearby Medical Facilities</h3>
+              <ul class="emergency-list">
+                <li>Central Hospital (24/7)<br />500m from city center</li>
+                <li>MediCare Pharmacy<br />Open 24/7</li>
+              </ul>
+            </div>
+
+            <div class="emergency-card">
+              <h3><i class="fas fa-building"></i> Embassy Contact</h3>
+              <ul class="emergency-list">
+                <li>Indian Embassy<br />Tel:8074909717</li>
+              </ul>
+            </div>
+
+            <div class="emergency-card">
+              <h3><i class="fas fa-taxi"></i> Transportation</h3>
+              <ul class="emergency-list">
+                <li>Uber: Available</li>
+                <li>Local Taxi: 9838764289</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="language" class="tab-content">
+          <h3>Essential Phrases</h3>
+          <div class="phrase-card">
+            <div class="phrase-text">Hello</div>
+            <div class="phrase-translation">Namaste</div>
+            <button class="play-audio" onclick="playAudio('Namaste')">
+              <i class="fas fa-volume-up"></i>
+            </button>
+          </div>
+
+          <h3>Local Customs</h3>
+          <ul class="emergency-list">
+            <li>
+              <i class="fas fa-info-circle"></i> Tipping: 10-15% is standard
+            </li>
+            <li>
+              <i class="fas fa-info-circle"></i> Remove shoes before entering
+              temples
+            </li>
+          </ul>
+
+          <h3>Common Scams to Watch Out For</h3>
+          <ul class="emergency-list">
+            <li>
+              <i class="fas fa-exclamation-triangle"></i> Fake taxi meters
+            </li>
+            <li>
+              <i class="fas fa-exclamation-triangle"></i> "Free" bracelet scams
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="destinationModal" class="modal">
+      <button class="close-modal" onclick="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="packing-list-btn" onclick="togglePackingList(event)">
+        <i class="fas fa-suitcase"></i>
+        Packing List
+      </button>
+      <div class="modal-content"></div>
+    </div>
+
+    <div class="packing-list-sidebar" id="packingListSidebar">
+      <button class="close-packing-list" onclick="closePackingList()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 style="color: var(--primary); margin-bottom: 2rem">
+        Travel Packing List
+      </h2>
+
+      <div class="packing-category">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <span><i class="fas fa-passport"></i> Essential Documents</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="category-items">
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Passport/ID
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Travel Insurance
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Booking Confirmations
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Emergency Contacts
+          </div>
+        </div>
+      </div>
+
+      <div class="packing-category">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <span><i class="fas fa-tshirt"></i> Clothing</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="category-items">
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Casual Wear
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Formal Outfit
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Swimming Gear
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Weather-appropriate Jacket
+          </div>
+        </div>
+      </div>
+
+      <div class="packing-category">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <span><i class="fas fa-plug"></i> Electronics</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="category-items">
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Phone & Charger
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Power Bank
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Camera
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Universal Adapter
+          </div>
+        </div>
+      </div>
+
+      <div class="packing-category">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <span><i class="fas fa-first-aid"></i> Health & Toiletries</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="category-items">
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> First Aid Kit
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Prescription Medications
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Toothbrush & Toothpaste
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Sunscreen
+          </div>
+        </div>
+      </div>
+
+      <div class="packing-category">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <span><i class="fas fa-map"></i> Travel Accessories</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="category-items">
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Day Bag/Backpack
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Money Belt
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Travel Pillow
+          </div>
+          <div class="packing-item">
+            <i class="fas fa-check-circle"></i> Water Bottle
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+    <div style="text-align: center; padding: 2rem">
+      <p style="font-size: 1.2rem; color: var(--text-light)">
+        No recommendations available yet. Please try again.
+      </p>
+    </div>
+    {% endif %}
+
+    <script>
+      function showModal(place) {
+        const modal = document.getElementById("destinationModal");
+        const modalContent = modal.querySelector(".modal-content");
+
+        const card = Array.from(
+          document.querySelectorAll(".recommendation-card")
+        ).find((card) => card.querySelector("h3").textContent === place);
+
+        if (card) {
+          modalContent.innerHTML = card.innerHTML;
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("destinationModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+        closePackingList();
+      }
+
+      document
+        .getElementById("destinationModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+
+      document
+        .querySelectorAll(".activities-list li, .food-list li")
+        .forEach((item) => {
+          item.addEventListener("mouseover", function () {
+            this.style.transform = "translateX(10px)";
+            this.style.transition = "transform 0.3s ease";
+          });
+
+          item.addEventListener("mouseout", function () {
+            this.style.transform = "translateX(0)";
+          });
+        });
+
+      function togglePackingList(event) {
+        event.stopPropagation();
+        const sidebar = document.getElementById("packingListSidebar");
+        sidebar.classList.toggle("active");
+      }
+
+      function closePackingList() {
+        const sidebar = document.getElementById("packingListSidebar");
+        sidebar.classList.remove("active");
+      }
+
+      function toggleCategory(header) {
+        const items = header.nextElementSibling;
+        const icon = header.querySelector(".fa-chevron-down");
+
+        items.classList.toggle("active");
+        if (items.classList.contains("active")) {
+          icon.style.transform = "rotate(180deg)";
+        } else {
+          icon.style.transform = "rotate(0deg)";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".category-items").forEach((category) => {
+          category.classList.add("active");
+          const icon =
+            category.previousElementSibling.querySelector(".fa-chevron-down");
+          icon.style.transform = "rotate(180deg)";
+        });
+      });
+      function switchTab(event, tabId) {
+        const tabs = document.querySelectorAll(".tab-button");
+        const contents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach((tab) => tab.classList.remove("active"));
+        contents.forEach((content) => content.classList.remove("active"));
+
+        event.currentTarget.classList.add("active");
+        document.getElementById(tabId).classList.add("active");
+      }
+
+      function saveToCalendar(day) {
+        alert(`Itinerary for Day ${day} has been saved to your calendar!`);
+      }
+
+      function playAudio(phrase) {
+        alert(`Playing audio for: ${phrase}`);
+      }
+      function populateItinerary(place) {
+        const itineraries = {
+          Manali: {
+            days: [
+              {
+                dayNumber: 1,
+                activities: [
+                  {
+                    time: "Early Morning",
+                    title: "Paragliding at Solang Valley",
+                    duration: "2-3 hours",
+                    bestTime: "Less crowded, cooler temperatures",
+                    notes:
+                      "Best for adventure enthusiasts. Stunning Himalayan views.",
+                  },
+                  {
+                    time: "Late Morning",
+                    title: "Hidimba Devi Temple Visit",
+                    duration: "1 hour",
+                    bestTime: "Before noon to avoid midday heat",
+                    notes: "Ancient wooden temple surrounded by deodar forests",
+                  },
+                  {
+                    time: "Afternoon",
+                    title: "Mall Road Exploration",
+                    duration: "2-3 hours",
+                    bestTime: "Post-lunch, less rush",
+                    notes: "Shopping, local cuisine, and street exploration",
+                  },
+                  {
+                    time: "Evening",
+                    title: "River Rafting at Beas River",
+                    duration: "1-2 hours",
+                    bestTime: "Late afternoon for calmer waters",
+                    notes:
+                      "Exciting water adventure with scenic mountain backdrop",
+                  },
+                ],
+                foodRecommendations: [
+                  "Try Siddu at local restaurants",
+                  "Taste fresh Trout Fish for lunch",
+                  "Evening Momos with spicy dipping sauce",
+                  "End day with Kullu Rajma",
+                ],
+              },
+              {
+                dayNumber: 2,
+                activities: [
+                  {
+                    time: "Early Morning",
+                    title: "Trek to Hampta Pass or Bhrigu Lake",
+                    duration: "6-8 hours",
+                    bestTime: "Early start for best mountain views",
+                    notes:
+                      "Challenging trek with breathtaking Himalayan landscapes",
+                  },
+                  {
+                    time: "Afternoon",
+                    title: "Rest and Local Exploration",
+                    duration: "3-4 hours",
+                    bestTime: "Post-trek relaxation",
+                    notes: "Recover from trek, explore local markets",
+                  },
+                ],
+                foodRecommendations: [
+                  "Packed lunch during trek",
+                  "Hot local soup after return",
+                  "Traditional Himachali dinner",
+                ],
+              },
+            ],
+          },
+          Jabalpur: {
+            days: [
+              {
+                dayNumber: 1,
+                activities: [
+                  {
+                    time: "Early Morning",
+                    title: "Boat Ride at Marble Rocks, Bhedaghat",
+                    duration: "2-3 hours",
+                    bestTime: "Sunrise, cooler temperatures",
+                    notes:
+                      "Stunning marble rock formations along Narmada River",
+                  },
+                  {
+                    time: "Late Morning",
+                    title: "Dhuandhar Falls Visit",
+                    duration: "1-2 hours",
+                    bestTime: "Before noon",
+                    notes:
+                      "Powerful waterfall with misty spray, great photography spot",
+                  },
+                  {
+                    time: "Afternoon",
+                    title: "Madan Mahal Fort Exploration",
+                    duration: "2 hours",
+                    bestTime: "Post-lunch, less crowded",
+                    notes: "Historical fort with panoramic city views",
+                  },
+                  {
+                    time: "Evening",
+                    title: "Chausath Yogini Temple Visit",
+                    duration: "1 hour",
+                    bestTime: "Late afternoon/early evening",
+                    notes:
+                      "10th-century temple with architectural significance",
+                  },
+                ],
+                foodRecommendations: [
+                  "Morning: Try local street breakfast",
+                  "Lunch: Dal Bafla at traditional restaurant",
+                  "Evening Chaat at local market",
+                  "Dessert: Khoye ki Jalebi",
+                ],
+              },
+              {
+                dayNumber: 2,
+                activities: [
+                  {
+                    time: "Early Morning",
+                    title: "Rani Durgavati Museum",
+                    duration: "2-3 hours",
+                    bestTime: "Right after opening",
+                    notes:
+                      "Historical artifacts, sculptures, and coin collections",
+                  },
+                  {
+                    time: "Afternoon",
+                    title: "Local Market and Shopping",
+                    duration: "3-4 hours",
+                    bestTime: "Less crowded hours",
+                    notes: "Explore local handicrafts, textiles, and souvenirs",
+                  },
+                ],
+                foodRecommendations: [
+                  "Museum cafe lunch",
+                  "Sabudana Khichdi as light snack",
+                  "Evening food tour of local specialties",
+                ],
+              },
+            ],
+          },
+        };
+
+        const itineraryTab = document.getElementById("itinerary");
+        const destination = itineraries[place];
+
+        if (destination) {
+          let itineraryHTML = "";
+          destination.days.forEach((day) => {
+            itineraryHTML += `
+              <div class="day-itinerary">
+                <div class="day-header">
+                  <h3>Day ${day.dayNumber}</h3>
+                  <button class="save-calendar-btn" onclick="saveToCalendar(${
+                    day.dayNumber
+                  })">
+                    <i class="fas fa-calendar-plus"></i>
+                    Save to Calendar
+                  </button>
+                </div>
+                
+                <div class="weather-alert">
+                  <i class="fas fa-cloud-sun"></i>
+                  <strong>Weather Note:</strong> Plan activities flexibly based on local conditions.
+                </div>
+
+                ${day.activities
+                  .map(
+                    (activity) => `
+                  <div class="activity-item">
+                    <div class="activity-time">${activity.time}</div>
+                    <div class="activity-details">
+                      <div class="activity-title">${activity.title}</div>
+                      <div class="activity-meta">
+                        <span><i class="fas fa-clock"></i> ${activity.duration}</span>
+                        <span><i class="fas fa-info-circle"></i> ${activity.bestTime}</span>
+                      </div>
+                      <div class="alternate-activity">
+                        <strong>Notes:</strong> ${activity.notes}
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+
+                <div class="section-title">
+                  <i class="fas fa-utensils"></i>
+                  <span>Food Recommendations</span>
+                </div>
+                <ul class="food-list">
+                  ${day.foodRecommendations
+                    .map(
+                      (food) => `
+                    <li>${food}</li>
+                  `
+                    )
+                    .join("")}
+                </ul>
+              </div>
+            `;
+          });
+
+          itineraryTab.innerHTML = itineraryHTML;
+        }
+      }
+
+      function showModal(place) {
+        const modal = document.getElementById("destinationModal");
+        const overviewTab = document.getElementById("overview");
+
+        const card = Array.from(
+          document.querySelectorAll(".recommendation-card")
+        ).find((card) => card.querySelector("h3").textContent === place);
+
+        if (card) {
+          overviewTab.innerHTML = card.innerHTML;
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+
+          const tabs = document.querySelectorAll(".tab-button");
+          const contents = document.querySelectorAll(".tab-content");
+          tabs.forEach((tab) => tab.classList.remove("active"));
+          contents.forEach((content) => content.classList.remove("active"));
+          tabs[0].classList.add("active");
+          contents[0].classList.add("active");
+
+          // Call the new function to populate itinerary dynamically
+          populateItinerary(place);
+        }
+      }
+    </script>
+  </body>
+</html>
+{% endblock %}

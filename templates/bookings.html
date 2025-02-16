@@ -1,0 +1,148 @@
+{% extends "home.html" %}
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 200px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            max-width: 120px;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .cart-item-details p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        .cart-item-price {
+            color: #4CAF50;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cart-item-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .cart-item-actions .remove-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .cart-item-actions .remove-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .cart-item-actions .book-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .cart-item-actions .book-btn:hover {
+            background-color: #388e3c;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .cart-total span {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-container">
+    {% if bookings %}
+    {% for i in bookings %}
+    <div class="cart-item">
+       
+        <!-- Left side: Image -->
+        <img src="/{{i.image}}" alt="Product Image">
+
+        <!-- Middle Content: Title, Description, Price -->
+        <div class="cart-item-details">
+            <h4>{{i.hotelname}}</h4>
+            <p>{{i.desc}}</p>
+            <p class="cart-item-price">{{i.location}}</p>
+        </div>
+
+        <!-- Right side: Remove and Book buttons -->
+        
+    </div>
+
+    <!-- Another Cart Item (Repeat the above structure for more items) -->
+            
+    
+    {% endfor %}
+    {% else %}
+    <center><p>No bookings found.</p></center>
+    {% endif %}
+
+    <!-- Cart Total -->
+    {% comment %} <div class="cart-total">
+        Total Price: <span>$219.00</span>
+    </div> {% endcomment %}
+   
+</div>
+
+{% endblock %}

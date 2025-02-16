@@ -1,0 +1,178 @@
+{% extends "index.html" %} {% block content %}
+<header>
+  <div class="header-area">
+    <div id="sticky-header" class="main-header-area">
+      <div class="container-fluid">
+        <div class="header_bottom_border">
+          <div class="row align-items-center">
+            <div class="col-xl-2 col-lg-2">
+              <div class="logo">
+                <a href="#">
+                  <h1 style="color: red; display: flex; align-items: center">
+                    <img
+                      src="/static/img/airplane.png"
+                      alt=""
+                      style="height: 45px; width: 55px; margin-right: 2px"
+                    />
+                    JourneyGenie
+                  </h1>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6" style="margin-left: 70px">
+              <div class="main-menu d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    {% if login == 'admin' %}
+                    <li><a class="active" href="{% url 'homes' %}">Home</a></li>
+                    <li><a href="{% url 'destinations' %}">Destinations</a></li>
+                    <li><a href="{% url 'addplaces' %}">Add Places</a></li>
+                    {% elif login == 'user' %}
+                    <li><a class="active" href="{% url 'homes' %}">Home</a></li>
+                    <li><a href="{% url 'destinations' %}">Destinations</a></li>
+                    <li><a href="{% url 'bookings' %}">Bookings</a></li>
+                    <li><a href="{% url 'recommend' %}">Recommendation</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            {% if login == 'user' %}
+            <div class="seach_icon">
+              <a href="{% url 'cart' %}" style="font-size: 45px">
+                <i class="fa fa-cart-arrow-down"></i>
+              </a>
+            </div>
+            {% endif %}
+            <div class="col-12">
+              <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- slider_area_start -->
+<div class="slider_area">
+  <div class="slider_active owl-carousel">
+    <div class="single_slider d-flex align-items-center slider_bg_1 overlay">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-xl-12 col-md-12">
+            <div class="slider_text text-center">
+              <h3>Meghalaya</h3>
+              <a
+                href="{% url 'destinations' %}"
+                class="boxed-btn3"
+                style="margin-top: 30px"
+                >Explore Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="single_slider d-flex align-items-center slider_bg_2 overlay">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-xl-12 col-md-12">
+            <div class="slider_text text-center">
+              <h3>Himachal Pradesh</h3>
+              <a
+                href="{% url 'destinations' %}"
+                class="boxed-btn3"
+                style="margin-top: 30px"
+                >Explore Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="single_slider d-flex align-items-center slider_bg_3 overlay">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-xl-12 col-md-12">
+            <div class="slider_text text-center">
+              <h3>Araku</h3>
+              <a
+                href="{% url 'destinations' %}"
+                class="boxed-btn3"
+                style="margin-top: 30px"
+                >Explore Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- slider_area_end -->
+
+<!-- popular_destination_area_start  -->
+<div class="popular_destination_area py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="section-title">Popular Destinations</h2>
+        <p class="text-muted">
+          Discover top destinations with stunning views and unforgettable
+          experiences.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      {% for i in places %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="destination-card h-100 shadow-sm rounded overflow-hidden">
+          <div class="destination-image">
+            <img
+              src="/{{ i.image.0.imgpath }}"
+              alt="{{ i.placename }}"
+              class="img-fluid w-100"
+              style="height: 250px; object-fit: cover"
+            />
+          </div>
+          <div class="destination-content p-3 text-center">
+            <h5 class="destination-title mb-2">{{ i.placename }}</h5>
+            <a
+              href="{% url 'destdetails' i.id %}"
+              class="btn btn-outline-primary btn-sm"
+              >Explore</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- popular_destination_area_end -->
+
+<!-- video_area_start -->
+<section class="video-section py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title mb-4">Explore Our Creators</h2>
+        <div class="video-container position-relative">
+          <div class="embed-responsive embed-responsive-16by9 rounded shadow">
+            <iframe
+              class="embed-responsive-item"
+              src="https://www.youtube.com/embed/f59dDEk57i0"
+              title="Travel Destination Video"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- video_area_end -->
+
+{% endblock %}

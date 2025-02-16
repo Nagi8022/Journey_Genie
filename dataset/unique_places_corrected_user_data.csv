@@ -1,0 +1,184 @@
+UserID,Age,Gender,Health Conditions,Climate Preference,Activity Type,Travel Budget,Time Available,Current Location,Travel Companions,Recommended Place
+1,25,Male,Asthma,Moderate,Relaxation,Medium,Week-long,Mumbai,Solo,Manali
+2,40,Female,"Hypertension, Arthritis",Cold,Cultural,High,Weekend trip,Delhi,Family,Coorg
+3,60,Male,Diabetes,Hot,Wildlife,Low,Extended stay,Kolkata,Couple,Kaziranga
+4,30,Female,Allergies,Moderate,Adventure,Medium,Short trip,Bangalore,Friends,Leh
+5,55,Male,Heart Disease,Cold,Wellness,High,Week-long,Chennai,Solo,Udaipur
+6,45,Female,COPD,Cold,Nature Trails,Medium,Weekend trip,Hyderabad,Family,Ooty
+7,70,Female,Osteoporosis,Hot,Cultural,Low,Short trip,Ahmedabad,Couple,Ranthambore
+8,34,Male,"Asthma, Diabetes",Moderate,Food Tours,Medium,Extended stay,Pune,Friends,Amritsar
+9,50,Female,Hypertension,Moderate,Relaxation,High,Weekend trip,Jaipur,Solo,Goa
+10,29,Male,Migraines,Cold,Adventure,Low,Week-long,Surat,Family,Jaipur
+11,66,Female,Epilepsy,Hot,Relaxation,Medium,Short trip,Lucknow,Couple,Agra
+12,38,Female,Kidney Disease,Moderate,Wellness,High,Extended stay,Patna,Friends,Rishikesh
+13,43,Male,Anxiety/Depression,Moderate,Cultural,Medium,Week-long,Bhopal,Solo,Jaisalmer
+14,58,Female,Lactose Intolerance,Hot,Adventure,Low,Short trip,Guwahati,Family,Darjeeling
+15,22,Male,Allergies,Cold,Wildlife,Medium,Weekend trip,Chandigarh,Couple,Shillong
+16,33,Female,"Heart Disease, Hypertension",Moderate,Food Tours,High,Extended stay,Coimbatore,Friends,Pondicherry
+17,47,Male,Obesity,Cold,Wellness,Low,Week-long,Mysore,Solo,Kerala
+18,53,Male,Skin Sensitivity,Moderate,Relaxation,High,Short trip,Nagpur,Family,Kodaikanal
+19,62,Female,Arthritis,Moderate,Nature Trails,Medium,Weekend trip,Varanasi,Couple,Shimla
+20,28,Female,"Diabetes, Obesity",Hot,Adventure,Low,Extended stay,Thiruvananthapuram,Friends,Andaman
+21,25,Male,Asthma,Moderate,Relaxation,Medium,Week-long,Mumbai,Solo,Mumbai
+22,40,Female,"Hypertension, Arthritis",Cold,Cultural,High,Weekend trip,Delhi,Family,Ahmedabad
+23,60,Male,Diabetes,Hot,Wildlife,Low,Extended stay,Kolkata,Couple,Srinagar
+24,30,Female,Allergies,Moderate,Adventure,Medium,Short trip,Bangalore,Friends,Gangtok
+25,55,Male,Heart Disease,Cold,Wellness,High,Week-long,Chennai,Solo,Mysore
+26,45,Female,COPD,Cold,Nature Trails,Medium,Weekend trip,Hyderabad,Family,Alleppey
+27,70,Female,Osteoporosis,Hot,Cultural,Low,Short trip,Ahmedabad,Couple,Hampi
+28,34,Male,"Asthma, Diabetes",Moderate,Food Tours,Medium,Extended stay,Pune,Friends,Puri
+29,50,Female,Hypertension,Moderate,Relaxation,High,Weekend trip,Jaipur,Solo,Kolkata
+30,29,Male,Migraines,Cold,Adventure,Low,Week-long,Surat,Family,Khajuraho
+31,66,Female,Epilepsy,Hot,Relaxation,Medium,Short trip,Lucknow,Couple,Bhopal
+32,38,Female,Kidney Disease,Moderate,Wellness,High,Extended stay,Patna,Friends,Pachmarhi
+33,43,Male,Anxiety/Depression,Moderate,Cultural,Medium,Week-long,Bhopal,Solo,Tawang
+34,58,Female,Lactose Intolerance,Hot,Adventure,Low,Short trip,Guwahati,Family,Majuli
+35,22,Male,Allergies,Cold,Wildlife,Medium,Weekend trip,Chandigarh,Couple,Ranthambhore
+36,33,Female,"Heart Disease, Hypertension",Moderate,Food Tours,High,Extended stay,Coimbatore,Friends,Ranchi
+37,47,Male,Obesity,Cold,Wellness,Low,Week-long,Mysore,Solo,Gulmarg
+38,53,Male,Skin Sensitivity,Moderate,Relaxation,High,Short trip,Nagpur,Family,Varanasi
+39,62,Female,Arthritis,Moderate,Nature Trails,Medium,Weekend trip,Varanasi,Couple,Chandigarh
+40,28,Female,"Diabetes, Obesity",Hot,Adventure,Low,Extended stay,Thiruvananthapuram,Friends,Dwarka
+41,25,Male,Asthma,Moderate,Relaxation,Medium,Week-long,Mumbai,Solo,Haridwar
+42,40,Female,"Hypertension, Arthritis",Cold,Cultural,High,Weekend trip,Delhi,Family,Chikmagalur
+43,60,Male,Diabetes,Hot,Wildlife,Low,Extended stay,Kolkata,Couple,Lakshadweep
+44,30,Female,Allergies,Moderate,Adventure,Medium,Short trip,Bangalore,Friends,Jodhpur
+45,55,Male,Heart Disease,Cold,Wellness,High,Week-long,Chennai,Solo,Mount Abu
+46,45,Female,COPD,Cold,Nature Trails,Medium,Weekend trip,Hyderabad,Family,Lonavala
+47,70,Female,Osteoporosis,Hot,Cultural,Low,Short trip,Ahmedabad,Couple,Mahabalipuram
+48,34,Male,"Asthma, Diabetes",Moderate,Food Tours,Medium,Extended stay,Pune,Friends,Rameswaram
+49,50,Female,Hypertension,Moderate,Relaxation,High,Weekend trip,Jaipur,Solo,Tirupati
+50,29,Male,Migraines,Cold,Adventure,Low,Week-long,Surat,Family,Nainital
+51,66,Female,Epilepsy,Hot,Relaxation,Medium,Short trip,Lucknow,Couple,Mussoorie
+52,38,Female,Kidney Disease,Moderate,Wellness,High,Extended stay,Patna,Friends,Sundarbans
+53,43,Male,Anxiety/Depression,Moderate,Cultural,Medium,Week-long,Bhopal,Solo,Mahabaleshwar
+54,58,Female,Lactose Intolerance,Hot,Adventure,Low,Short trip,Guwahati,Family,Kumarakom
+55,22,Male,Allergies,Cold,Wildlife,Medium,Weekend trip,Chandigarh,Couple,Lakshadweep
+56,33,Female,"Heart Disease, Hypertension",Moderate,Food Tours,High,Extended stay,Coimbatore,Friends,Aizawl
+57,47,Male,Obesity,Cold,Wellness,Low,Week-long,Mysore,Solo,Bhubaneswar
+58,53,Male,Skin Sensitivity,Moderate,Relaxation,High,Short trip,Nagpur,Family,Daman
+59,62,Female,Arthritis,Moderate,Nature Trails,Medium,Weekend trip,Varanasi,Couple,Nagaland
+60,28,Female,"Diabetes, Obesity",Hot,Adventure,Low,Extended stay,Thiruvananthapuram,Friends,Cherrapunji
+61,25,Male,Asthma,Moderate,Relaxation,Medium,Week-long,Mumbai,Solo,Bikaner
+62,40,Female,"Hypertension, Arthritis",Cold,Cultural,High,Weekend trip,Delhi,Family,Bundi
+63,60,Male,Diabetes,Hot,Wildlife,Low,Extended stay,Kolkata,Couple,Jabalpur
+64,30,Female,Allergies,Moderate,Adventure,Medium,Short trip,Bangalore,Friends,Gwalior
+65,32,Female,Asthma,Moderate,Adventure,Medium,Week-long,Bangalore,Friends,Manali
+66,45,Male,"Hypertension, Diabetes",Cold,Wellness,High,Extended stay,Mumbai,Solo,Shimla
+67,28,Female,Allergies,Hot,Cultural,Medium,Short trip,Delhi,Couple,Udaipur
+68,55,Male,Heart Disease,Cold,Relaxation,High,Weekend trip,Chennai,Family,Ooty
+69,39,Female,COPD,Moderate,Nature Trails,Low,Week-long,Kolkata,Solo,Darjeeling
+70,62,Male,Arthritis,Hot,Wildlife,Medium,Extended stay,Hyderabad,Couple,Ranthambore
+71,29,Female,Migraines,Moderate,Adventure,Medium,Short trip,Pune,Friends,Leh
+72,48,Male,"Anxiety/Depression, Hypertension",Cold,Wellness,High,Week-long,Jaipur,Family,Rishikesh
+73,35,Female,Asthma,Hot,Food Tours,Medium,Weekend trip,Ahmedabad,Solo,Amritsar
+74,58,Male,Diabetes,Moderate,Cultural,Low,Extended stay,Surat,Couple,Jaisalmer
+75,31,Female,Allergies,Cold,Adventure,Medium,Short trip,Lucknow,Friends,Goa
+76,52,Male,Heart Disease,Hot,Relaxation,High,Week-long,Patna,Family,Agra
+77,43,Female,"COPD, Allergies",Moderate,Nature Trails,Medium,Weekend trip,Bhopal,Solo,Kerala
+78,64,Male,Osteoporosis,Cold,Wildlife,Low,Extended stay,Coimbatore,Couple,Kaziranga
+79,33,Female,Asthma,Hot,Adventure,Medium,Short trip,Mysore,Friends,Andaman
+80,47,Male,Hypertension,Moderate,Wellness,High,Week-long,Nagpur,Family,Kodaikanal
+81,27,Female,Migraines,Cold,Cultural,Low,Weekend trip,Varanasi,Solo,Shillong
+82,56,Male,"Diabetes, Heart Disease",Hot,Relaxation,Medium,Extended stay,Thiruvananthapuram,Couple,Pondicherry
+83,38,Female,Allergies,Moderate,Food Tours,High,Short trip,Chandigarh,Friends,Hampi
+84,51,Male,Anxiety/Depression,Cold,Nature Trails,Medium,Week-long,Guwahati,Family,Alleppey
+85,30,Female,Asthma,Hot,Adventure,Low,Weekend trip,Mumbai,Solo,Gangtok
+86,59,Male,Arthritis,Moderate,Cultural,High,Extended stay,Delhi,Couple,Mahabalipuram
+87,34,Female,"Hypertension, Allergies",Cold,Wellness,Medium,Short trip,Bangalore,Friends,Mussoorie
+88,49,Male,Diabetes,Hot,Wildlife,High,Week-long,Chennai,Family,Sundarbans
+89,36,Female,COPD,Moderate,Relaxation,Low,Weekend trip,Kolkata,Solo,Puri
+90,61,Male,Heart Disease,Cold,Nature Trails,Medium,Extended stay,Hyderabad,Couple,Tawang
+91,28,Female,Migraines,Hot,Adventure,High,Short trip,Pune,Friends,Majuli
+92,53,Male,"Asthma, Diabetes",Moderate,Food Tours,Low,Week-long,Jaipur,Family,Ranthambhore
+93,37,Female,Allergies,Cold,Cultural,Medium,Weekend trip,Ahmedabad,Solo,Cherrapunji
+94,57,Male,Hypertension,Hot,Wellness,High,Extended stay,Surat,Couple,Gulmarg
+95,32,Female,COPD,Moderate,Relaxation,Medium,Short trip,Lucknow,Friends,Bhubaneswar
+96,46,Male,"Heart Disease, Arthritis",Cold,Nature Trails,Low,Week-long,Patna,Family,Daman
+97,29,Female,Asthma,Hot,Adventure,High,Weekend trip,Bhopal,Solo,Dwarka
+98,54,Male,Diabetes,Moderate,Cultural,Medium,Extended stay,Coimbatore,Couple,Khajuraho
+99,35,Female,Allergies,Cold,Wildlife,Low,Short trip,Mysore,Friends,Pachmarhi
+100,50,Male,Anxiety/Depression,Hot,Wellness,High,Week-long,Nagpur,Family,Ranchi
+101,31,Female,"Hypertension, COPD",Moderate,Food Tours,Medium,Weekend trip,Varanasi,Solo,Tirupati
+102,63,Male,Heart Disease,Cold,Relaxation,Low,Extended stay,Thiruvananthapuram,Couple,Nainital
+103,33,Female,Asthma,Hot,Adventure,High,Short trip,Chandigarh,Friends,Jodhpur
+104,48,Male,Diabetes,Moderate,Cultural,Medium,Week-long,Guwahati,Family,Mount Abu
+105,36,Female,Allergies,Cold,Nature Trails,Low,Weekend trip,Mumbai,Solo,Lonavala
+106,58,Male,"Heart Disease, Hypertension",Hot,Wildlife,High,Extended stay,Delhi,Couple,Mahabaleshwar
+107,30,Female,COPD,Moderate,Adventure,Medium,Short trip,Bangalore,Friends,Kumarakom
+108,52,Male,Arthritis,Cold,Wellness,Low,Week-long,Chennai,Family,Aizawl
+109,34,Female,Migraines,Hot,Relaxation,High,Weekend trip,Kolkata,Solo,Bikaner
+110,60,Male,Diabetes,Moderate,Cultural,Medium,Extended stay,Hyderabad,Couple,Bundi
+111,29,Female,"Asthma, Allergies",Cold,Food Tours,Low,Short trip,Pune,Friends,Jabalpur
+112,51,Male,Heart Disease,Hot,Nature Trails,High,Week-long,Jaipur,Family,Gwalior
+113,37,Female,Hypertension,Moderate,Adventure,Medium,Weekend trip,Ahmedabad,Solo,Haridwar
+114,56,Male,COPD,Cold,Wellness,Low,Extended stay,Surat,Couple,Chikmagalur
+115,32,Female,Diabetes,Hot,Cultural,High,Short trip,Lucknow,Friends,Lakshadweep
+116,49,Male,"Anxiety/Depression, Arthritis",Moderate,Relaxation,Medium,Week-long,Patna,Family,Srinagar
+117,35,Female,Asthma,Cold,Wildlife,Low,Weekend trip,Bhopal,Solo,Gangtok
+118,62,Male,Heart Disease,Hot,Adventure,High,Extended stay,Coimbatore,Couple,Mysore
+119,28,Female,Allergies,Moderate,Food Tours,Medium,Short trip,Mysore,Friends,Alleppey
+120,54,Male,"Hypertension, Diabetes",Cold,Nature Trails,Low,Week-long,Nagpur,Family,Hampi
+121,33,Female,COPD,Hot,Cultural,High,Weekend trip,Varanasi,Solo,Puri
+122,47,Male,Arthritis,Moderate,Wellness,Medium,Extended stay,Thiruvananthapuram,Couple,Kolkata
+123,36,Female,Migraines,Cold,Adventure,Low,Short trip,Chandigarh,Friends,Khajuraho
+124,59,Male,Diabetes,Hot,Relaxation,High,Week-long,Guwahati,Family,Bhopal
+125,31,Female,"Asthma, Heart Disease",Moderate,Food Tours,Medium,Weekend trip,Mumbai,Solo,Pachmarhi
+126,53,Male,Hypertension,Cold,Wildlife,Low,Extended stay,Delhi,Couple,Tawang
+127,34,Female,Allergies,Hot,Cultural,High,Short trip,Bangalore,Friends,Majuli
+128,50,Male,COPD,Moderate,Nature Trails,Medium,Week-long,Chennai,Family,Ranthambhore
+129,38,Female,Diabetes,Cold,Adventure,Low,Weekend trip,Kolkata,Solo,Ranchi
+130,57,Male,"Heart Disease, Arthritis",Hot,Wellness,High,Extended stay,Hyderabad,Couple,Gulmarg
+131,30,Female,Asthma,Moderate,Relaxation,Medium,Short trip,Pune,Friends,Varanasi
+132,52,Male,Hypertension,Cold,Cultural,Low,Week-long,Jaipur,Family,Chandigarh
+133,35,Female,Allergies,Hot,Food Tours,High,Weekend trip,Ahmedabad,Solo,Dwarka
+134,61,Male,COPD,Moderate,Wildlife,Medium,Extended stay,Surat,Couple,Haridwar
+135,29,Female,"Diabetes, Migraines",Cold,Adventure,Low,Short trip,Lucknow,Friends,Chikmagalur
+136,55,Male,Heart Disease,Hot,Nature Trails,High,Week-long,Patna,Family,Lakshadweep
+137,32,Female,Asthma,Moderate,Cultural,Medium,Weekend trip,Bhopal,Solo,Jodhpur
+138,48,Male,Arthritis,Cold,Wellness,Low,Extended stay,Coimbatore,Couple,Mount Abu
+139,36,Female,Hypertension,Hot,Relaxation,High,Short trip,Mysore,Friends,Lonavala
+140,58,Male,"Diabetes, COPD",Moderate,Food Tours,Medium,Week-long,Nagpur,Family,Mahabalipuram
+141,33,Female,Allergies,Cold,Adventure,Low,Weekend trip,Varanasi,Solo,Rameswaram
+142,51,Male,Heart Disease,Hot,Cultural,High,Extended stay,Thiruvananthapuram,Couple,Tirupati
+143,37,Female,Asthma,Moderate,Nature Trails,Medium,Short trip,Chandigarh,Friends,Nainital
+144,56,Male,Hypertension,Cold,Wildlife,Low,Week-long,Guwahati,Family,Mussoorie
+145,31,Female,"COPD, Allergies",Hot,Wellness,High,Weekend trip,Mumbai,Solo,Sundarbans
+146,54,Male,Diabetes,Moderate,Adventure,Medium,Extended stay,Delhi,Couple,Mahabaleshwar
+147,34,Female,Heart Disease,Cold,Relaxation,Low,Short trip,Bangalore,Friends,Kumarakom
+148,49,Male,Arthritis,Hot,Cultural,High,Week-long,Chennai,Family,Lakshadweep
+149,35,Female,Migraines,Moderate,Food Tours,Medium,Weekend trip,Kolkata,Solo,Aizawl
+150,60,Male,"Asthma, Diabetes",Cold,Nature Trails,Low,Extended stay,Hyderabad,Couple,Bhubaneswar
+151,28,Female,Hypertension,Hot,Adventure,High,Short trip,Pune,Friends,Daman
+152,53,Male,COPD,Moderate,Wellness,Medium,Week-long,Jaipur,Family,Nagaland
+153,36,Female,Heart Disease,Cold,Cultural,Low,Weekend trip,Ahmedabad,Solo,Cherrapunji
+154,57,Male,"Allergies, Arthritis",Hot,Relaxation,High,Extended stay,Surat,Couple,Bikaner
+155,32,Female,Diabetes,Moderate,Wildlife,Medium,Short trip,Lucknow,Friends,Bundi
+156,50,Male,Asthma,Cold,Food Tours,Low,Week-long,Patna,Family,Jabalpur
+157,37,Female,Hypertension,Hot,Adventure,High,Weekend trip,Bhopal,Solo,Gwalior
+158,59,Male,COPD,Moderate,Nature Trails,Medium,Extended stay,Coimbatore,Couple,Haridwar
+159,30,Female,"Heart Disease, Migraines",Cold,Cultural,Low,Short trip,Mysore,Friends,Chikmagalur
+160,52,Male,Diabetes,Hot,Wellness,High,Week-long,Nagpur,Family,Lakshadweep
+161,35,Female,Allergies,Moderate,Relaxation,Medium,Weekend trip,Varanasi,Solo,Srinagar
+162,58,Male,Asthma,Cold,Wildlife,Low,Extended stay,Thiruvananthapuram,Couple,Gangtok
+163,33,Female,Hypertension,Hot,Adventure,High,Short trip,Chandigarh,Friends,Mysore
+164,51,Male,"COPD, Heart Disease",Moderate,Food Tours,Medium,Week-long,Guwahati,Family,Alleppey
+165,36,Female,Arthritis,Cold,Cultural,Low,Weekend trip,Mumbai,Solo,Hampi
+166,56,Male,Diabetes,Hot,Nature Trails,High,Extended stay,Delhi,Couple,Puri
+167,31,Female,Asthma,Moderate,Wellness,Medium,Short trip,Bangalore,Friends,Kolkata
+168,54,Male,Allergies,Cold,Relaxation,Low,Week-long,Chennai,Family,Khajuraho
+169,34,Female,"Hypertension, COPD",Hot,Adventure,High,Weekend trip,Kolkata,Solo,Bhopal
+170,49,Male,Heart Disease,Moderate,Cultural,Medium,Extended stay,Hyderabad,Couple,Pachmarhi
+171,37,Female,Diabetes,Cold,Wildlife,Low,Short trip,Pune,Friends,Tawang
+172,60,Male,Arthritis,Hot,Food Tours,High,Week-long,Jaipur,Family,Majuli
+173,29,Female,Asthma,Moderate,Nature Trails,Medium,Weekend trip,Ahmedabad,Solo,Ranthambhore
+174,53,Male,"Migraines, Allergies",Cold,Wellness,Low,Extended stay,Surat,Couple,Ranchi
+175,35,Female,Hypertension,Hot,Adventure,High,Short trip,Lucknow,Friends,Gulmarg
+176,57,Male,COPD,Moderate,Cultural,Medium,Week-long,Patna,Family,Varanasi
+177,32,Female,Heart Disease,Cold,Relaxation,Low,Weekend trip,Bhopal,Solo,Chandigarh
+178,50,Male,Diabetes,Hot,Wildlife,High,Extended stay,Coimbatore,Couple,Dwarka
+179,36,Female,"Asthma, Arthritis",Moderate,Food Tours,Medium,Short trip,Mysore,Friends,Haridwar
+180,59,Male,Hypertension,Cold,Nature Trails,Low,Week-long,Nagpur,Family,Chikmagalur
+181,31,Female,Allergies,Hot,Adventure,High,Weekend trip,Varanasi,Solo,Lakshadweep
+182,52,Male,COPD,Moderate,Wellness,Medium,Extended stay,Thiruvananthapuram,Couple,Jodhpur
+183,34,Female,Heart Disease,Cold,Cultural,Low,Short trip,Chandigarh,Friends,Mount Abu

@@ -1,0 +1,115 @@
+{% extends "index.html" %}
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eee7a9;
+            
+            
+        }
+        .containr {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 40px auto;
+            height: 650px;
+            margin-top: 30px; /* Adjusted to create space below the navbar */
+        }
+        .image-section {
+            flex: 1;
+            background: url('/static/img/i1.jpg') no-repeat center center/cover;
+            /* max-width: 800px; */
+        }
+        .form-section {
+            flex: 1;
+            padding: 40px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .form-group input , .form-group textarea {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+            outline: none;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="containr">
+    <div class="image-section"></div>
+    <div class="form-section">
+        {% if messages %}
+        {% for message in messages %}
+       <center> <p class="alert alert-success">{{message}}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h2>Register</h2>
+        <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="firstname" placeholder="First Name" required>
+                <input type="text" name="lastname" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="contactnumber" placeholder="Contact Number" required 
+                pattern="^[6789][0-9]{9}$" 
+                title="Contact Number must be 10 digits long and start with 6, 7, 8, or 9.">    
+             </div>
+           
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required pattern=".{8}" 
+                title="Password must be exactly 8 digits." minlength="8" maxlength="8">
+                          <input type="password" name="confirmpassword" placeholder="Confirm Password" required pattern=".{8}" 
+              title="Password must be exactly 8 digits." minlength="8" maxlength="8">        </div>
+            <div class="form-group">
+                <textarea name="address" placeholder="Address" rows="4" required></textarea>
+            </div>
+            <div class="form-group ">
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+            <div class="form-group" >
+                <button type="submit">Submit</button>
+            </div>
+            <p style="color: black; text-align: center;"><a href="{% url 'login' %}">Already Have an Account? Login</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

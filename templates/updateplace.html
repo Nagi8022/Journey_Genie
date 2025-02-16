@@ -1,0 +1,185 @@
+{% extends "home.html" %}
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(174, 203, 230);
+          
+        }
+        .form-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 40px auto;
+            box-sizing: border-box;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-group input[type="file"] {
+            padding: 3px;
+            background-color: #f4f7fc;
+        }
+        .form-group .preview-img {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .form-group button:hover {
+            background-color: #4cae4c;
+        }
+        .form-group .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        {% if messages %}
+        {% for message in messages %}
+       <center> <p class="alert alert-success">{{message}}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h2>Update Place Information</h2>
+        <form id="placeForm" action="{% url 'updateplace' id jid %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <div class="form-group">
+                <label for="placeName">Place Name</label>
+                <input type="text" id="placeName" name="name" placeholder="Enter place name" value="{{data.placename}}" required>
+                <span class="error-message" id="placeNameError">Please enter a place name.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter location" value="{{data.location}}" required>
+                <span class="error-message" id="locationError">Please enter the location.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="desc" placeholder="Describe the place"  required>{{data.desc}}</textarea>
+                <span class="error-message" id="descriptionError">Please enter a description.</span>
+            </div>
+       
+            <div class="form-group">
+                <label for="image">Upload Image</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <img id="preview" class="preview-img" src="#" alt="Image Preview" style="display: none;">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- <script>
+        // Image preview functionality
+        const imageInput = document.getElementById('image');
+        const preview = document.getElementById('preview');
+
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // Form validation
+        const form = document.getElementById('placeForm');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let valid = true;
+
+            // Validate Place Name
+            const placeName = document.getElementById('placeName');
+            if (!placeName.value.trim()) {
+                document.getElementById('placeNameError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('placeNameError').style.display = 'none';
+            }
+
+            // Validate Location
+            const location = document.getElementById('location');
+            if (!location.value.trim()) {
+                document.getElementById('locationError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('locationError').style.display = 'none';
+            }
+
+            // Validate Description
+            const description = document.getElementById('description');
+            if (!description.value.trim()) {
+                document.getElementById('descriptionError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('descriptionError').style.display = 'none';
+            }
+
+            // If valid, proceed with form submission (you can send it to the server here)
+            if (valid) {
+                alert('Form submitted successfully!');
+                // Reset form (optional)
+                form.reset();
+                preview.style.display = 'none';
+            }
+        });
+    </script> -->
+
+{% endblock %}
